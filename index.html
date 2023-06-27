@@ -1,15 +1,12 @@
 <html>
     <body>
-        <style>
-            
-        </style>
         <form onsubmit="saveToLocalStorage(event)">
             <label> Name</label>
-            <input type="text" name="username"  required/>
+            <input type="text" name="username" id="usernameInputTag"  required/>
             <label> EmailId</label>
-            <input type="email" name="emailId"  required/>
+            <input type="email" name="emailId" id="emailInputTag"  required/>
             <label> Phone Number</label>
-            <input type="tel" name="phonenumber" />
+            <input type="tel" name="phonenumber" id="phonenumberInputTag" required />
             <button> Submit</button>
         </form>
         <ul id="listofitems"></ul>
@@ -43,7 +40,20 @@
                     parentElem.removeChild(childElem)
                 }
 
+                const editButton = document.createElement('input')
+                editButton.type = "button"
+                editButton.value = 'Edit'
+                editButton.onclick = () => {
+                    localStorage.removeItem(obj.email)
+                    parentElem.removeChild(childElem)
+                    document.getElementById('usernameInputTag').value = obj.name
+                    document.getElementById('emailInputTag').value = obj.email
+                    document.getElementById('phonenumberInputTag').value = obj.phonenumber
+                }
+
+
                 childElem.appendChild(deleteButton)
+                childElem.appendChild(editButton)
                 parentElem.appendChild(childElem)
 
                 // or we can also write the above 3 lines as
