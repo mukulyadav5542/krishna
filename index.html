@@ -9,21 +9,33 @@
             <input type="tel" name="phonenumber" />
             <button> Submit</button>
         </form>
+        <ul id="listofitems"></ul>
         <script>
             function saveToLocalStorage(event) {
                 event.preventDefault();
                 const name = event.target.username.value;
                 const email = event.target.emailId.value;
                 const phonenumber = event.target.phonenumber.value;
-                localStorage.setItem('name', name);
-                localStorage.setItem('email', email);
-                localStorage.setItem('phonenumber', phonenumber);
+                // localStorage.setItem('name', name);
+                // localStorage.setItem('email', email);
+                // localStorage.setItem('phonenumber', phonenumber);
                 const obj = {
                     name,
                     email,
                     phonenumber
                 }
-                localStorage.setItem('userDetails', JSON.stringify(obj));
+                localStorage.setItem(obj.email, JSON.stringify(obj))
+                showUserOnScreen(obj)
+            }
+
+            function showUserOnScreen(obj) {
+                const parentElem = document.getElementById('listofitems')
+                // const childElem = document.createElement('li')
+                // childElem.textContent = obj.name + ' - ' + obj.email + ' - ' + obj.phonenumber
+                // parentElem.appendChild(childElem)
+
+                // or we can also write the above 3 lines as
+                parentElem.innerHTML = parentElem.innerHTML + `<li>${obj.name} - ${obj.email} - ${obj.phonenumber}</li>`
             }
         </script>
     </body>
